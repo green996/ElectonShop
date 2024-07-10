@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png'
 //icons
 import { CiUser, CiHeart, CiShoppingCart } from "react-icons/ci";
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 
 
 function NavbarComponent() {
@@ -20,7 +21,12 @@ function NavbarComponent() {
                     {/*Login: Clerk library*/}
                     <div className='flex items-center gap-1'>
                         <CiUser size={30} />
-                        <span>Sign In</span>
+                        <SignedOut>
+                            <SignInButton />
+                        </SignedOut>
+                        <SignedIn>
+                            <UserButton afterSwitchSessionUrl='/' />
+                        </SignedIn>
                     </div>
                     {/*Favorite*/}
                     <div className='flex items-center gap-1'>
@@ -40,7 +46,7 @@ function NavbarComponent() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
