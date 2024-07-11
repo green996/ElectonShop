@@ -12,7 +12,7 @@ function CategoryComponents() {
     useEffect(() => {
         ProductService.getAllCategory()
             .then((res) => setCategory(res.data))
-            .catch((err) => toast.warning('No data found!'));
+            .catch((err) => toast.warning(err));
 
     }, []);
 

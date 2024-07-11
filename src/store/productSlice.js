@@ -8,7 +8,7 @@ const productSlice = createSlice({
     },
     reducers: {
         getProductHandler: (state, action) => {
-            console.log(action.payload)
+            //console.log(action.payload)
             state.allProducts = action.payload;
         }
     }

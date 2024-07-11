@@ -10,7 +10,9 @@ function NavbarComponent() {
     return (
         <div className=' bg-mainBlue py-3 xl:py-0 lg:h-24 flex items-center'>
             <div className="container mx-auto lg:flex-row  flex justify-between items-center flex-col gap-4">
-                <img src={logo} alt='electonShoplogo' />
+                <Link to='/'>
+                    <img src={logo} alt='electonShoplogo' />
+                </Link>
                 {/*search component*/}
                 <div className='bg-textWhite rounded-[20px] '>
                     <input type="text" placeholder='Search product...' className='px-6 py-4 rounded-[20px] outline-none placeholder:text-black' />
