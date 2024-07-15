@@ -5,6 +5,9 @@ import ProductService from "../services/productService"
 //icons
 import { FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
+import { Rating } from "@mui/material";
+import ButtonComponent from "../components/ButtonComponent";
+import { FaRegHeart } from "react-icons/fa";
 
 
 function ProductDetailsPage() {
@@ -12,7 +15,9 @@ function ProductDetailsPage() {
     const [singleProduct, setSingleProduct] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const { id } = useParams();
+
     useEffect(() => {
+        setIsLoading(true)
         const fetchProduct = async () => {
             try {
                 const res = await ProductService.getSingleProduct(id);
@@ -42,7 +47,7 @@ function ProductDetailsPage() {
                             className="border border-mainBlue rounded-2xl h-96 cursor-pointer"
                         />
                         {/* Image thumbnails */}
-                        <div className="flex gap-3">
+                        <div className="flex flex-wrap gap-3">
                             {singleProduct.images.map((el, i) => (
                                 <img
                                     src={el}
@@ -59,36 +64,42 @@ function ProductDetailsPage() {
                     </div>
                     {/* Right side */}
                     <div className="lg:w-1/2 lg:pl-8">
-                        <h2 className="text-3xl lg:text-4xl text-mainBlue font-bold">
+                        <h2 className="text-3xl lg:text-3xl text-mainBlue font-bold">
                             {singleProduct.title}
                         </h2>
-                        <span className="text-xl">${singleProduct.price}</span>
-                        <p className="flex items-center">
+                        <span className="text-xl font-bold">${singleProduct.price}</span>
+                        <div className="flex items-center gap-2">
                             <span className="mr-2">Reviews:</span>
-                            {singleProduct.rating}
-                        </p>
+                            <Rating name="half-rating-read" defaultValue={singleProduct.rating} precision={0.5} readOnly />
+                        </div>
                         <div className="flex items-center mb-2">
-                            Availability:{' '}
                             {singleProduct.stock ? (
-                                <span className="flex items-center text-green-500 ml-1">
-                                    <FaCheck className="mr-1" />
-                                    Available
+                                <span className="flex items-center text-green-500 ml-1 gap-2">
+                                    <FaCheck color="#30BD657" size={20} />
+                                    In stock
                                 </span>
                             ) : (
-                                <span className="flex items-center text-red-500 ml-1">
-                                    <ImCross className="mr-1" />
+                                <span className="flex items-center text-red-500 ml-1 gap-2">
+                                    <ImCross color="#FF0000" size={20} />
                                     Out of stock
                                 </span>
                             )}
                         </div>
-                        <p className="mb-2">
-                            Hurry up! Only {singleProduct.stock} product left in
+                        <div className="mb-2">
+                            Hurry up! Only <span className="font-bold underline">{singleProduct.stock}</span>  product left in
                             stock!
-                        </p>
+                        </div>
                         <hr className="my-3" />
-                        <p className="text-lg">
+                        <div className="text-lg">
                             Total price: <span className="font-bold">${singleProduct.price}</span>
-                        </p>
+                        </div>
+                        {/*add favorite section*/}
+                        <div className="flex items-center gap-3 mt-3">
+                            <ButtonComponent label='Add Cart' bgColor='#EDA415' textColor='#fff' />
+                            <button className="px-6 py-3 rounded-full bg-slate-400 ">
+                                <FaRegHeart size={28} color="#fff" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
