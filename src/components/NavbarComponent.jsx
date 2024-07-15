@@ -4,9 +4,13 @@ import logo from '../assets/logo.png'
 //icons
 import { CiUser, CiHeart, CiShoppingCart } from "react-icons/ci";
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
+import { useSelector } from 'react-redux';
 
 
 function NavbarComponent() {
+
+    const { totalProduct } = useSelector(state => state.cartStore)
+
     return (
         <div className=' bg-mainBlue py-3 xl:py-0 lg:h-24 flex items-center'>
             <div className="container mx-auto lg:flex-row  flex justify-between items-center flex-col gap-4">
@@ -42,7 +46,7 @@ function NavbarComponent() {
                     <div className='flex items-center gap-1'>
                         <div className='flex items-center'>
                             <CiShoppingCart size={30} />
-                            <span className='bg-mainOrange rounded-[50%] w-6 h-6 flex items-center justify-center'>0</span>
+                            <span className='bg-mainOrange rounded-[50%] w-6 h-6 flex items-center justify-center'>{totalProduct}</span>
                         </div>
                         <Link to='/'>Cart</Link>
                     </div>
