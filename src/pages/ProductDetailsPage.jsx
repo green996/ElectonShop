@@ -28,48 +28,74 @@ function ProductDetailsPage() {
     }, [id]);
 
 
-    return (<>
-        {isLoading ?
-            (<>Loading...</>)
-            :
-            (
-                <>
-                    <div className=" flex flex-col container mx-auto mb-12">
-                        {/*left side*/}
-                        <div className="flex mt-12 flex-col gap-7 justify-center items-center lg:gap-3 lg:flex-row ">
-                            <img src={singleProduct.images[currentImage]} alt={singleProduct.title} className="border border-mainBlue rounded-2xl h-96 cursor-pointer" />
-                        </div>
+    return (
+        <>
+            {isLoading ? (
+                <>Loading...</>
+            ) : (
+                <div className="flex flex-col lg:flex-row container mx-auto mb-12">
+                    {/* Left side */}
+                    <div className="flex flex-col gap-7 justify-center items-center lg:gap-3 lg:w-1/2">
+                        <img
+                            src={singleProduct.images[currentImage]}
+                            alt={singleProduct.title}
+                            className="border border-mainBlue rounded-2xl h-96 cursor-pointer"
+                        />
+                        {/* Image thumbnails */}
                         <div className="flex gap-3">
-                            {singleProduct.images.map((el, i) => {
-                                return <img src={el} key={i} alt="..." className={`${currentImage === i ? 'border-mainOrange' : 'border-mainBlue'} w-24 h-24 p-1 object-cover border border-mainBlue rounded-2xl`} onClick={() => setCurrentImage(i)} />
-                            })}
+                            {singleProduct.images.map((el, i) => (
+                                <img
+                                    src={el}
+                                    key={i}
+                                    alt="..."
+                                    className={`${currentImage === i
+                                        ? 'border-mainOrange'
+                                        : 'border-mainBlue'
+                                        } w-24 h-24 p-1 object-cover border border-mainBlue rounded-2xl cursor-pointer`}
+                                    onClick={() => setCurrentImage(i)}
+                                />
+                            ))}
                         </div>
-                        {/*right side*/}
-                        <div>
-                            <h2 className=" text-[30px] text-mainBlue font-bold">{singleProduct.title}</h2>
-                            <span>${singleProduct.price}</span>
-                            <p>
-                                <span>Reviews:</span>
-                                {singleProduct.rating}
-                            </p>
-                            Availability:
-                            {singleProduct.stock ?
-                                (<span>
-                                    <FaCheck />
+                    </div>
+                    {/* Right side */}
+                    <div className="lg:w-1/2 lg:pl-8">
+                        <h2 className="text-3xl lg:text-4xl text-mainBlue font-bold">
+                            {singleProduct.title}
+                        </h2>
+                        <span className="text-xl">${singleProduct.price}</span>
+                        <p className="flex items-center">
+                            <span className="mr-2">Reviews:</span>
+                            {singleProduct.rating}
+                        </p>
+                        <div className="flex items-center mb-2">
+                            Availability:{' '}
+                            {singleProduct.stock ? (
+                                <span className="flex items-center text-green-500 ml-1">
+                                    <FaCheck className="mr-1" />
                                     Available
-                                </span>) :
-                                (<span>
-                                    <ImCross />
+                                </span>
+                            ) : (
+                                <span className="flex items-center text-red-500 ml-1">
+                                    <ImCross className="mr-1" />
                                     Out of stock
                                 </span>
-                                )}
-                            <p>Hurry up! Only {singleProduct.stock} product left in stock!</p>
-                            <hr className="mt-3" />
-                            <p>Total price: <span>${singleProduct.price}</span></p>
+                            )}
                         </div>
-                    </div></>)}
-    </>
-    )
+                        <p className="mb-2">
+                            Hurry up! Only {singleProduct.stock} product left in
+                            stock!
+                        </p>
+                        <hr className="my-3" />
+                        <p className="text-lg">
+                            Total price: <span className="font-bold">${singleProduct.price}</span>
+                        </p>
+                    </div>
+                </div>
+            )}
+        </>
+    );
+
+
 }
 
 export default ProductDetailsPage
