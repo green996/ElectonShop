@@ -48,7 +48,7 @@ function NavbarComponent() {
                             <CiShoppingCart size={30} />
                             <span className='bg-mainOrange rounded-[50%] w-6 h-6 flex items-center justify-center'>{totalProduct}</span>
                         </div>
-                        <Link to='/'>Cart</Link>
+                        <Link to='/cartProducts'>Cart</Link>
                     </div>
                 </div>
             </div>
