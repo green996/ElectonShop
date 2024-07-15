@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import ProductService from "../services/productService"
 
 //icons
 import { FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import { Rating } from "@mui/material";
-import ButtonComponent from "../components/ButtonComponent";
+//import ButtonComponent from "../components/ButtonComponent";
 import { FaRegHeart } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { saveInCartHandler } from "../store/cartSlice";
 
 
 function ProductDetailsPage() {
@@ -15,6 +17,8 @@ function ProductDetailsPage() {
     const [singleProduct, setSingleProduct] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const { id } = useParams();
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         setIsLoading(true)
@@ -32,6 +36,10 @@ function ProductDetailsPage() {
         fetchProduct();
     }, [id]);
 
+    //to gsm REDUX
+    function handleProduct() {
+        dispatch(saveInCartHandler(singleProduct))
+    }
 
     return (
         <>
@@ -93,9 +101,12 @@ function ProductDetailsPage() {
                         <div className="text-lg">
                             Total price: <span className="font-bold">${singleProduct.price}</span>
                         </div>
-                        {/*add favorite section*/}
+                        {/*Add favorite section*/}
                         <div className="flex items-center gap-3 mt-3">
-                            <ButtonComponent label='Add Cart' bgColor='#EDA415' textColor='#fff' />
+                            {/*<ButtonComponent label='Add Cart' bgColor='#EDA415' textColor='#fff' />*/}
+                            <Link to='/cartProducts' className="px-6 py-3 rounded-full bg-mainOrange text-textWhite " onClick={() => handleProduct()}>
+                                Add Cart
+                            </Link>
                             <button className="px-6 py-3 rounded-full bg-slate-400 ">
                                 <FaRegHeart size={28} color="#fff" />
                             </button>
