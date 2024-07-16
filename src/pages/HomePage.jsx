@@ -41,9 +41,9 @@ function HomePage() {
                 }} className="p-3 h-10 w-10 rounded-md" />
             </div>
             {/*Our product*/}
-            <div className="flex flex-wrap gap-8 items-center justify-center mt-10 ">
+            <div className={activeView === 'gridView' ? 'flex flex-wrap gap-8 items-center justify-center mt-10' : 'flex flex-col '}>
                 {allProducts.map((item, index) => {
-                    return <CardProductComponent key={item.id} item={item} />
+                    return <CardProductComponent key={item.id} item={item} activeView={activeView} />
                 })}
             </div>
         </div>
