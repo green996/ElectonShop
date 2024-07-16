@@ -11,6 +11,7 @@ import { IoGrid } from "react-icons/io5";
 
 
 function HomePage() {
+    const [activeView, setActiveView] = useState('gridView')
 
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch()
@@ -32,8 +33,12 @@ function HomePage() {
     return (
         <div className="container mx-auto">
             <div className="flex items-center justify-end gap-5 cursor-pointer mt-5">
-                <FaListUl size={30} />
-                <IoGrid size={30} />
+                <FaListUl size={30} onClick={() => { setActiveView('listView') }} style={{
+                    backgroundColor: activeView !== 'gridView' ? '#EDA415' : null
+                }} className="p-3 h-10 w-10 rounded-md" />
+                <IoGrid size={30} onClick={() => { setActiveView('gridView') }} style={{
+                    backgroundColor: activeView === 'gridView' ? '#EDA415' : null
+                }} className="p-3 h-10 w-10 rounded-md" />
             </div>
             {/*Our product*/}
             <div className="flex flex-wrap gap-8 items-center justify-center mt-10 ">

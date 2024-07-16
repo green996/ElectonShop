@@ -47,7 +47,15 @@ const cartSlice = createSlice({
                 copyArray[index].count += increment;
             }
             state.cart = copyArray;
+        },
+        removeProductHandler: (state, action) => {
+            const { index } = action.payload;
+            let copyArray = [...state.cart];
+            copyArray.splice(index, 1);
+            state.totalProduct--;
+            state.totalPrice = subTotal(copyArray);
 
+            state.cart = copyArray;
         }
 
 
@@ -60,5 +68,5 @@ function subTotal(arr) {
     }, 0)
 }
 
-export const { saveInCartHandler, setPriceHandler } = cartSlice.actions;
+export const { saveInCartHandler, setPriceHandler, removeProductHandler } = cartSlice.actions;
 export default cartSlice.reducer;
