@@ -30,9 +30,35 @@ const cartSlice = createSlice({
             }
 
             state.cart = copyArray;
+        },
+        setPriceHandler: (state, action) => {
+            const { increment, index } = action.payload;
+
+            let copyArray = [...state.cart];
+            copyArray[index].cartTotal += copyArray[index].price * increment;
+
+            //total price
+            state.totalPrice = subTotal(copyArray)
+
+            if (copyArray[index].count === 1 && increment === -1) {
+                copyArray.splice(index, 1);
+                state.totalProduct--;
+            } else {
+                copyArray[index].count += increment;
+            }
+            state.cart = copyArray;
+
         }
+
+
     }
 })
 
-export const { saveInCartHandler } = cartSlice.actions;
+function subTotal(arr) {
+    return arr.reduce((acc, curr) => {
+        return acc + curr.cartTotal;
+    }, 0)
+}
+
+export const { saveInCartHandler, setPriceHandler } = cartSlice.actions;
 export default cartSlice.reducer;

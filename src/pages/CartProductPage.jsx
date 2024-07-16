@@ -21,7 +21,7 @@ function CartProductPage() {
                     {/*body of items*/}
                     <div className="flex flex-col gap-4">
                         {cart.map((item, index) => {
-                            return <CartItemsComponent item={item} key={index} />
+                            return <CartItemsComponent item={item} index={index} key={index} />
                         })}
                     </div>
                 </div>

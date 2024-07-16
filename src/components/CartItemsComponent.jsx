@@ -1,7 +1,10 @@
 //icons
 import { CiCircleRemove } from "react-icons/ci";
+import { useDispatch } from "react-redux";
+import { setPriceHandler } from "../store/cartSlice";
 
-function CartItemsComponent({ item }) {
+function CartItemsComponent({ item, index }) {
+    const dispatch = useDispatch()
     return (
         <div className="grid grid-cols-4 place-items-center relative"  >
             <div className="flex gap-2 items-center">
@@ -14,9 +17,9 @@ function CartItemsComponent({ item }) {
             </div>
             <div>${item.price}</div>
             <div className="flex items-center">
-                <button className="px-2 py-1 bg-slate-300 text-base">+</button>
+                <button className="px-2 py-1 bg-slate-300 text-base" onClick={() => { dispatch(setPriceHandler({ increment: 1, index })) }}>+</button>
                 <span className="px-2 py-1 bg-slate-300 text-base">{item.count}</span>
-                <button className="px-2 py-1 bg-slate-300 text-base">-</button>
+                <button className="px-2 py-1 bg-slate-300 text-base" onClick={() => { dispatch(setPriceHandler({ increment: -1, index })) }}>-</button>
             </div>
             <div>
                 <p>{item.cartTotal}</p>
