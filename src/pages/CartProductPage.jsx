@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import CartItemsComponent from "../components/CartItemsComponent"
-import country from "../country/country"
+import country from "../exports//country"
 import { useRef, useState } from "react";
 
 

@@ -14,7 +14,7 @@ function CardProductComponent({ item, activeView }) {
             </div>
             <h2 className="text-xl font-bold">{item.title}</h2>
             <span className="text-mainBlue font-bold">${item.price}</span>
-            <div>
+            <div className="hidden md:flex">
                 <Rating name="half-rating-read" defaultValue={item.rating} precision={0.5} readOnly />
             </div>
             <Link to={`/productDetails/${item.id}`} className="bg-mainOrange text-textWhite px-3 py-1 rounded-md cursor-pointer hover:bg-mainBlue">View Detail</Link>

@@ -6,6 +6,8 @@ import NavbarComponent from './components/NavbarComponent'
 import CategoryComponents from './components/CategoryComponents'
 
 import axios from 'axios'
+import FooterComponent from './components/FooterComponent'
+
 
 axios.defaults.baseURL = 'https://dummyjson.com'
 
@@ -20,7 +22,7 @@ function App() {
         <NavbarComponent />
         <CategoryComponents />
         <Outlet />
-        {/*Footer Component*/}
+        <FooterComponent />
       </div>
 
     </>
