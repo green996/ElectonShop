@@ -22,7 +22,7 @@ function FooterComponent() {
                 <SubscribedComponent />
 
                 {/* content fotter */}
-                <div className='mt-12 flex flex-col items-center'>
+                <div className='mt-12 flex flex-col items-center lg:flex-row'>
                     {/* left side */}
                     <div className='ml-2 flex flex-col gap-5 w-full md:w-[20%]'>
                         <img src={logo} alt='myLogo' className='w-36' />
