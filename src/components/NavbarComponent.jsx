@@ -4,15 +4,25 @@ import logo from '../assets/logo.png'
 //icons
 import { CiUser, CiHeart, CiShoppingCart } from "react-icons/ci";
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 //framer motion
 import { motion } from "framer-motion"
+import { useRef } from 'react';
+import { saveSearchValue } from '../store/productSlice';
+
 
 function NavbarComponent() {
-
+    const searchValue = useRef()
     const { totalProduct } = useSelector(state => state.cartStore);
     const { favoriteTotal } = useSelector((state) => state.favoriteStore);
+
+    const dispatch = useDispatch()
+
+    function searchHandle() {
+        dispatch(saveSearchValue(searchValue.current.value));
+        searchValue.current.value = '';
+    }
 
     return (
         <div className=' bg-mainBlue py-3 xl:py-0 lg:h-24 flex items-center'>
@@ -22,8 +32,8 @@ function NavbarComponent() {
                 </Link>
                 {/*search component*/}
                 <div className='bg-textWhite rounded-[20px] '>
-                    <input type="text" placeholder='Search product...' className='px-6 py-4 rounded-[20px] outline-none placeholder:text-black' />
-                    <button className='rounded-[20px] bg-mainOrange text-textWhite px-10 py-5 text-[14px]'>Search</button>
+                    <input ref={searchValue} type="text" placeholder='Search product...' className='px-6 py-4 rounded-[20px] outline-none placeholder:text-black' />
+                    <button onClick={() => searchHandle()} className='rounded-[20px] bg-mainOrange text-textWhite px-10 py-5 text-[14px]'>Search</button>
                 </div>
                 {/*General info*/}
                 <div className='flex items-center gap-3 text-textWhite'>

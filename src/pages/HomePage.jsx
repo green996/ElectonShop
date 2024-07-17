@@ -14,7 +14,7 @@ function HomePage() {
     const [activeView, setActiveView] = useState('gridView');
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
-    const { allProducts } = useSelector((state) => state.productStore);
+    const { allProducts, currentSearch } = useSelector((state) => state.productStore);
 
 
     useEffect(() => {
@@ -24,6 +24,14 @@ function HomePage() {
             .catch((err) => toast.warning(err))
             .finally(() => setLoading(false))
     }, []);
+
+    useEffect(() => {
+        ProductService.getSearchProducts(currentSearch)
+            .then((res) => dispatch(getProductHandler((res.data.products))))
+            .catch((err) => console.log(err))
+            .finally(() => setLoading(false))
+
+    }, [currentSearch,])
 
     return (
         <div className="container mx-auto">
