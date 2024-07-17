@@ -12,22 +12,17 @@ import { IoGrid } from "react-icons/io5";
 
 function HomePage() {
     const [activeView, setActiveView] = useState('gridView');
-
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const { allProducts } = useSelector((state) => state.productStore);
 
-    function fetchAllProducts() {
+
+    useEffect(() => {
         // setLoading(true);
         ProductService.getAllProducts()
             .then((res) => dispatch(getProductHandler((res.data.products))))
             .catch((err) => toast.warning(err))
             .finally(() => setLoading(false))
-
-    }
-
-    useEffect(() => {
-        fetchAllProducts();
     }, []);
 
     return (
@@ -45,6 +40,7 @@ function HomePage() {
                 {allProducts.map((item, index) => {
                     return <CardProductComponent key={item.id} item={item} activeView={activeView} />
                 })}
+                {console.log(allProducts)}
             </div>
         </div>
     );

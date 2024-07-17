@@ -3,9 +3,12 @@ import ProductService from "../services/productService"
 import { toast } from "react-toastify"
 
 
+
 function CategoryComponents() {
     const [category, setCategory] = useState([]);
     const [isActive, setIsActive] = useState(false);
+
+
 
 
 
@@ -15,6 +18,7 @@ function CategoryComponents() {
             .catch((err) => toast.warning(err));
 
     }, []);
+
 
 
     return (
@@ -28,14 +32,14 @@ function CategoryComponents() {
                 </button>
                 {isActive && (
                     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 place-items-center gap-4 w-full lg:w-auto">
-                        {category.map((cat, index) => (
-                            <li
+                        {category.map((cat, index) => {
+                            return (<li
                                 key={index}
                                 className="bg-mainBlue text-textWhite px-4 py-2 rounded-lg cursor-pointer hover:bg-mainOrange text-center transition-all w-60"
                             >
                                 {cat.name}
-                            </li>
-                        ))}
+                            </li>)
+                        })}
                     </ul>
                 )}
             </div>
