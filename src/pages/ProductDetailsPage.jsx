@@ -10,6 +10,7 @@ import { Rating } from "@mui/material";
 import { FaRegHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { saveInCartHandler } from "../store/cartSlice";
+import { favoriteHandler } from "../store/favoriteSlice";
 
 
 function ProductDetailsPage() {
@@ -39,6 +40,10 @@ function ProductDetailsPage() {
     //to gsm REDUX
     function handleProduct() {
         dispatch(saveInCartHandler(singleProduct))
+    }
+
+    function saveToFavorite() {
+        dispatch(favoriteHandler(singleProduct))
     }
 
     return (
@@ -109,7 +114,9 @@ function ProductDetailsPage() {
                                 Add Cart
                             </Link>
                             <button className="px-6 py-3 rounded-full bg-slate-400 ">
-                                <FaRegHeart size={28} color="#fff" />
+                                <Link to='/favorites'>
+                                    <FaRegHeart size={28} color="#fff" onClick={() => saveToFavorite()} />
+                                </Link>
                             </button>
                         </div>
                     </div>
