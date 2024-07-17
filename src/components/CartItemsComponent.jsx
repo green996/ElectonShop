@@ -5,7 +5,7 @@ import { removeProductHandler, setPriceHandler } from "../store/cartSlice";
 import { Link } from "react-router-dom";
 
 function CartItemsComponent({ item, index }) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     return (
         <div className="grid grid-cols-4 place-items-center relative px-3"  >
             <div className="flex gap-4 items-center  ">

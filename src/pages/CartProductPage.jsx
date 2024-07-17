@@ -4,7 +4,7 @@ import country from "../country/country"
 
 
 function CartProductPage() {
-    const { cart, totalPrice } = useSelector((state) => state.cartStore)
+    const { cart, totalPrice } = useSelector((state) => state.cartStore);
     //console.log(cart)
     return (
         <div className=" mt-5 lg:mt-12">

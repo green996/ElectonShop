@@ -6,7 +6,6 @@ function FavoritesPage() {
     const { favoriteItems } = useSelector((state) => state.favoriteStore);
 
 
-    console.log(favoriteItems)
     return (
         <div className="">
             <div className=" flex flex-col items-center gap-3 lg:flex-row lg:justify-center lg:flex-wrap lg:gap-3">

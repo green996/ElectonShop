@@ -2,24 +2,31 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import ProductService from "../services/productService"
 
-//icons
+
 import { FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import { Rating } from "@mui/material";
 //import ButtonComponent from "../components/ButtonComponent";
+
+//icons
 import { FaRegHeart } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { FaHeart } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { saveInCartHandler } from "../store/cartSlice";
 import { favoriteHandler } from "../store/favoriteSlice";
 
 
 function ProductDetailsPage() {
-    const [currentImage, setCurrentImage] = useState(0)
-    const [singleProduct, setSingleProduct] = useState({})
-    const [isLoading, setIsLoading] = useState(true)
+    const [currentImage, setCurrentImage] = useState(0);
+    const [singleProduct, setSingleProduct] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [favoriteIcon, setFavoriteIcon] = useState(null);
+
+    const { favoriteItems } = useSelector((state) => state.favoriteStore);
+
     const { id } = useParams();
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setIsLoading(true)
@@ -35,7 +42,16 @@ function ProductDetailsPage() {
         };
 
         fetchProduct();
-    }, [id]);
+    }, []);
+
+    useEffect(() => {
+        favoriteItems.find((item) => {
+            if (item.id === parseInt(id)) {
+                setFavoriteIcon(item.id);
+                return;
+            }
+        })
+    }, [favoriteItems])
 
     //to gsm REDUX
     function handleProduct() {
@@ -115,7 +131,8 @@ function ProductDetailsPage() {
                             </Link>
                             <button className="px-6 py-3 rounded-full bg-slate-400 ">
                                 <Link to='/favorites'>
-                                    <FaRegHeart size={28} color="#fff" onClick={() => saveToFavorite()} />
+                                    {favoriteIcon === parseInt(id) ? <FaHeart size={28} color="#f90000" onClick={() => saveToFavorite()} /> : <FaRegHeart size={28} color="#fff" onClick={() => saveToFavorite()} />}
+
                                 </Link>
                             </button>
                         </div>

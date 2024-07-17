@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 function NavbarComponent() {
 
     const { totalProduct } = useSelector(state => state.cartStore);
-    const { favoriteTotal } = useSelector((state) => state.favoriteStore)
+    const { favoriteTotal } = useSelector((state) => state.favoriteStore);
 
     return (
         <div className=' bg-mainBlue py-3 xl:py-0 lg:h-24 flex items-center'>

@@ -4,8 +4,8 @@ import { toast } from "react-toastify"
 
 
 function CategoryComponents() {
-    const [category, setCategory] = useState([])
-    const [isActive, setIsActive] = useState(false)
+    const [category, setCategory] = useState([]);
+    const [isActive, setIsActive] = useState(false);
 
 
 

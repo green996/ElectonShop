@@ -11,11 +11,11 @@ import { IoGrid } from "react-icons/io5";
 
 
 function HomePage() {
-    const [activeView, setActiveView] = useState('gridView')
+    const [activeView, setActiveView] = useState('gridView');
 
     const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch()
-    const { allProducts } = useSelector((state) => state.productStore)
+    const dispatch = useDispatch();
+    const { allProducts } = useSelector((state) => state.productStore);
 
     function fetchAllProducts() {
         // setLoading(true);
