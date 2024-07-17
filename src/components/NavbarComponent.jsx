@@ -6,6 +6,8 @@ import { CiUser, CiHeart, CiShoppingCart } from "react-icons/ci";
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 import { useSelector } from 'react-redux';
 
+//framer motion
+import { motion } from "framer-motion"
 
 function NavbarComponent() {
 
@@ -41,7 +43,9 @@ function NavbarComponent() {
                             <CiHeart size={30} />
                             <span className='bg-mainOrange rounded-[50%] w-6 h-6 flex items-center justify-center'>{favoriteTotal}</span>
                         </div>
-                        <Link to='/favorites'>Favorite</Link>
+                        <motion.div whileHover={{ scale: 0.8 }}>
+                            <Link to='/favorites'>Favorite</Link>
+                        </motion.div>
                     </div>
                     {/*Cart/Products*/}
                     <div className='flex items-center gap-1'>
@@ -49,7 +53,10 @@ function NavbarComponent() {
                             <CiShoppingCart size={30} />
                             <span className='bg-mainOrange rounded-[50%] w-6 h-6 flex items-center justify-center'>{totalProduct}</span>
                         </div>
-                        <Link to='/cartProducts'>Cart</Link>
+                        <motion.div whileHover={{ scale: 0.8 }} >
+                            <Link to='/cartProducts'>Cart</Link>
+                        </motion.div>
+
                     </div>
                 </div>
             </div>

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import ProductService from "../services/productService"
 
+// framer
+import { motion } from 'framer-motion';
 
 import { FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
@@ -62,6 +64,38 @@ function ProductDetailsPage() {
         dispatch(favoriteHandler(singleProduct))
     }
 
+    // Framer animtion
+    const fadeInAnimationVariants = {
+        initial: {
+            opacity: 0,
+            x: -100,
+        },
+        animate: {
+            opacity: 1,
+            x: 0,
+            transition: {
+                delay: 0.1,
+                duration: 1,
+            },
+        },
+    };
+
+    const fadeFromRightSide = {
+        initial: {
+            opacity: 0,
+            x: 100,
+        },
+        animate: {
+            opacity: 1,
+            x: 0,
+            transition: {
+                delay: 0.1,
+                duration: 1,
+            },
+        },
+    };
+
+
     return (
         <>
             {isLoading ? (
@@ -69,7 +103,13 @@ function ProductDetailsPage() {
             ) : (
                 <div className="flex flex-col lg:flex-row container mx-auto mb-12">
                     {/* Left side */}
-                    <div className="flex flex-col gap-7 justify-center items-center lg:gap-3 lg:w-1/2">
+                    <motion.div
+                        variants={fadeInAnimationVariants}
+                        initial='initial'
+                        whileInView='animate'
+                        viewport={{
+                            once: true,
+                        }} className="flex flex-col gap-7 justify-center items-center lg:gap-3 lg:w-1/2">
                         <img
                             src={singleProduct.images[currentImage]}
                             alt={singleProduct.title}
@@ -90,9 +130,16 @@ function ProductDetailsPage() {
                                 />
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
                     {/* Right side */}
-                    <div className="lg:w-1/2 lg:pl-8">
+                    <motion.div className="lg:w-1/2 lg:pl-8"
+
+                        variants={fadeFromRightSide}
+                        initial='initial'
+                        whileInView='animate'
+                        viewport={{
+                            once: true,
+                        }}>
                         <h2 className="text-3xl lg:text-3xl text-mainBlue font-bold">
                             {singleProduct.title}
                         </h2>
@@ -136,7 +183,7 @@ function ProductDetailsPage() {
                                 </Link>
                             </button>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             )}
         </>
